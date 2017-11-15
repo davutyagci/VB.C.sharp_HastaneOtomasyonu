@@ -62,30 +62,25 @@ namespace Hastane_Otomasyonu
             else
             {
                 baglan.Open();
-                OleDbCommand sorgu = new OleDbCommand("select * from kayit where TC = '" + TextBox1.Text + "'", baglan);
-                OleDbDataReader oku = sorgu.ExecuteReader();
-                if (oku.Read())
-                {
-                    OleDbCommand guncelleme = new OleDbCommand("update kayit set TC=@TC, ADI=@ADI, SOYADI=@SOYADI, DoğumTarihi=@DoğumTarihi, CEP=@CEP, CİNSİYETİ=@CİNSİYETİ, SİGORTA=@SİGORTA, KanGrubu=@KanGrubu, BabaAdı=@BabaAdı, AnneAdı=@AnneAdı, foto=@foto where ID=@ID", baglan);
-                    guncelleme.Parameters.AddWithValue("@TC", TextBox1.Text);
-                    guncelleme.Parameters.AddWithValue("@ADI", TextBox2.Text);
-                    guncelleme.Parameters.AddWithValue("@SOYADI", TextBox3.Text);
-                    guncelleme.Parameters.AddWithValue("@DoğumTarihi", DateTimePicker1.Text);
-                    guncelleme.Parameters.AddWithValue("@CEP", MaskedTextBox1.Text);
-                    guncelleme.Parameters.AddWithValue("@CİNSİYETİ", ComboBox1.Text);
-                    guncelleme.Parameters.AddWithValue("@SİGORTA", ComboBox2.Text);
-                    guncelleme.Parameters.AddWithValue("@KanGrubu", ComboBox3.Text);
-                    guncelleme.Parameters.AddWithValue("@BabaAdı", TextBox4.Text);
-                    guncelleme.Parameters.AddWithValue("@AnneAdı", TextBox5.Text);
-                    MemoryStream ms = new MemoryStream();
-                    PictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    guncelleme.Parameters.AddWithValue("@foto", ms.ToArray());
-                    guncelleme.Parameters.AddWithValue("@ID", tb_id.Text);
-                    guncelleme.ExecuteNonQuery();
-                    ms.Close();
-                    MessageBox.Show("GÜNCELLEME BAŞARILI.");
-                }
+                OleDbCommand guncelleme = new OleDbCommand("update kayit set TC=@TC, ADI=@ADI, SOYADI=@SOYADI, DoğumTarihi=@DoğumTarihi, CEP=@CEP, CİNSİYETİ=@CİNSİYETİ, SİGORTA=@SİGORTA, KanGrubu=@KanGrubu, BabaAdı=@BabaAdı, AnneAdı=@AnneAdı, foto=@foto where ID=@ID", baglan);
+                guncelleme.Parameters.AddWithValue("@TC", TextBox1.Text);
+                guncelleme.Parameters.AddWithValue("@ADI", TextBox2.Text);
+                guncelleme.Parameters.AddWithValue("@SOYADI", TextBox3.Text);
+                guncelleme.Parameters.AddWithValue("@DoğumTarihi", DateTimePicker1.Text);
+                guncelleme.Parameters.AddWithValue("@CEP", MaskedTextBox1.Text);
+                guncelleme.Parameters.AddWithValue("@CİNSİYETİ", ComboBox1.Text);
+                guncelleme.Parameters.AddWithValue("@SİGORTA", ComboBox2.Text);
+                guncelleme.Parameters.AddWithValue("@KanGrubu", ComboBox3.Text);
+                guncelleme.Parameters.AddWithValue("@BabaAdı", TextBox4.Text);
+                guncelleme.Parameters.AddWithValue("@AnneAdı", TextBox5.Text);
+                MemoryStream ms = new MemoryStream();
+                PictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                guncelleme.Parameters.AddWithValue("@foto", ms.ToArray());
+                guncelleme.Parameters.AddWithValue("@ID", tb_id.Text);
+                guncelleme.ExecuteNonQuery();
+                ms.Close();
                 baglan.Close();
+                MessageBox.Show("GÜNCELLEME BAŞARILI.");     
             }
         }
 
